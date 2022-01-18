@@ -92,9 +92,9 @@ class MemberCrudController extends CrudController
     }
 
     public function linebot(){
-        $datas = file_get_contents('php://input');
-        $deCode = json_decode($datas,true);
-        dd($deCode);
+        // $datas = file_get_contents('php://input');
+        // $deCode = json_decode($datas,true);
+
         // $replyToken = $deCode['events'][0]['replyToken'];
         // $userId = $deCode['events'][0]['source']['userId'];
         // $text = $deCode['events'][0]['message']['text'];
