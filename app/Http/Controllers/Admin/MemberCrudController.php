@@ -111,7 +111,7 @@ class MemberCrudController extends CrudController
         $results = $this->sentMessage($encodeJson,$LINEDatas);
 
         /*Return HTTP Request 200*/
-        return http_response_code(200);
+        http_response_code(200);
     }
 
     public function getFormatTextMessage($text)
