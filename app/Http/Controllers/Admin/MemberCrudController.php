@@ -108,11 +108,10 @@ class MemberCrudController extends CrudController
         $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
         $LINEDatas['token'] = "tDPaJd+bW7UKPKF5zqRNze0Oh17zytPFmQmtGkJsSMY2WT+HaUpS1o0np4Fd3x+WxsOSQ5J3j1cXI6A+yN+8a5zr8onFXU7ozOxxjX4VUds70mOAfI74sjOlxFXXBe2+wQy72HqPAQLNrwBKIvD/HwdB04t89/1O/w1cDnyilFU=";
 
-        // $results = $this->sentMessage($encodeJson,$LINEDatas);
+        $results = $this->sentMessage($encodeJson,$LINEDatas);
 
         /*Return HTTP Request 200*/
-        // return http_response_code(200);
-        return $encodeJson;
+        return http_response_code(200);
     }
 
     public function getFormatTextMessage($text)
