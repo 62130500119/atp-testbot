@@ -94,21 +94,21 @@ class MemberCrudController extends CrudController
     public function linebot(){
         $datas = file_get_contents('php://input');
         $deCode = json_decode($datas,true);
+        dd($deCode);
+        // $replyToken = $deCode['events'][0]['replyToken'];
+        // $userId = $deCode['events'][0]['source']['userId'];
+        // $text = $deCode['events'][0]['message']['text'];
 
-        $replyToken = $deCode['events'][0]['replyToken'];
-        $userId = $deCode['events'][0]['source']['userId'];
-        $text = $deCode['events'][0]['message']['text'];
+        // $messages = [];
+        // $messages['replyToken'] = $replyToken;
+        // $messages['messages'][0] = $this->getFormatTextMessage("ทดสอบอยู่ ไม่ว่าง");
 
-        $messages = [];
-        $messages['replyToken'] = $replyToken;
-        $messages['messages'][0] = $this->getFormatTextMessage("ทดสอบอยู่ ไม่ว่าง");
+        // $encodeJson = json_encode($messages);
 
-        $encodeJson = json_encode($messages);
+        // $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
+        // $LINEDatas['token'] = "tDPaJd+bW7UKPKF5zqRNze0Oh17zytPFmQmtGkJsSMY2WT+HaUpS1o0np4Fd3x+WxsOSQ5J3j1cXI6A+yN+8a5zr8onFXU7ozOxxjX4VUds70mOAfI74sjOlxFXXBe2+wQy72HqPAQLNrwBKIvD/HwdB04t89/1O/w1cDnyilFU=";
 
-        $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
-        $LINEDatas['token'] = "tDPaJd+bW7UKPKF5zqRNze0Oh17zytPFmQmtGkJsSMY2WT+HaUpS1o0np4Fd3x+WxsOSQ5J3j1cXI6A+yN+8a5zr8onFXU7ozOxxjX4VUds70mOAfI74sjOlxFXXBe2+wQy72HqPAQLNrwBKIvD/HwdB04t89/1O/w1cDnyilFU=";
-
-        $results = $this->sentMessage($encodeJson,$LINEDatas);
+        // $results = $this->sentMessage($encodeJson,$LINEDatas);
 
         /*Return HTTP Request 200*/
         return http_response_code(200);
