@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/atp-bot',[ MemberCrudController::class,'linebot']);
+
+Route::post('/register',[ MemberCrudController::class,'regis'])->name('register');

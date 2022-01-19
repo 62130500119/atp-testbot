@@ -7,6 +7,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use PhpParser\Node\Expr\FuncCall;
 use App\Models\Member;
+use Illuminate\Http\Request;
 
 /**
  * Class MemberCrudController
@@ -168,5 +169,17 @@ class MemberCrudController extends CrudController
         }
 
         return $datasReturn;
+    }
+
+    public function regis(Request $request){
+        $name = $request->name;
+        $tel = $request->tel;
+        $email = $request->email;
+        $member = Member::findOrCreate('uid',$request->userId);
+        $member->name = $name;
+        $member->tel = $tel;
+        $member->email = $email;
+        $member->save();
+        return view('liffinfo',compact('name','tel','email'));
     }
 }

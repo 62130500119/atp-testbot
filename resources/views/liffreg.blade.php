@@ -6,7 +6,7 @@
         <title>Register</title>
     </head>
     <body>
-        <form action="info" method="get">
+        <form action="register" method="post">
             <div class="row">
                 <div class="col-md-6" style="margin:5px">
                     <input class="form-control" type="hidden" id="userid" name="userid" value=""/> <br />
@@ -15,7 +15,7 @@
                     <label>TEL:</label><br />
                     <input class="form-control" type="text" id="tel" name="tel" /><br />
                     <label>EMAIL:</label><br />
-                    <input class="form-control" type="text" id="email" name="email" /><br />
+                    <input class="form-control" type="email" id="email" name="email" /><br />
                     <br />
                     <button class="btn btn-primary">ลงทะเบียน</button>
                 </div>
@@ -26,7 +26,6 @@
             function runApp() {
               liff.getProfile().then(profile => {
                 document.getElementById("userid").value = profile.userId;
-                console.log(profile.userId);
               }).catch(err => console.error(err));
             }
             liff.init({ liffId: "1656819334-zJP6arE9" }, () => {
