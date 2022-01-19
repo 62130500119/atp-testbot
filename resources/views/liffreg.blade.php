@@ -17,7 +17,7 @@
                     <label>EMAIL:</label><br />
                     <input class="form-control" type="email" id="email" name="email" /><br />
                     <br />
-                    <button class="btn btn-primary">ลงทะเบียน</button>
+                    <input type="submit" class="btn btn-primary" value="Submit" />
                 </div>
             </div>
         </form>
