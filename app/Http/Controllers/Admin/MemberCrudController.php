@@ -6,6 +6,7 @@ use App\Http\Requests\MemberRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use PhpParser\Node\Expr\FuncCall;
+use App\Models\Member;
 
 /**
  * Class MemberCrudController
@@ -93,22 +94,27 @@ class MemberCrudController extends CrudController
 
     public function linebot(){
         $datas = file_get_contents('php://input');
-        $deCode = json_decode($datas,true);
-
-        $replyToken = $deCode['events'][0]['replyToken'];
-        $userId = $deCode['events'][0]['source']['userId'];
-        $text = $deCode['events'][0]['message']['text'];
-
+        $events = json_decode($datas,true);
         $messages = [];
-        $messages['replyToken'] = $replyToken;
-        $messages['messages'][0] = $this->getFormatTextMessage("ทดสอบอยู่ ไม่ว่าง");
-
-        $encodeJson = json_encode($messages);
+        if(!is_null($events['events'])){
+            foreach($events['events'] as $event){
+                $replyToken = $event['replyToken'];
+                $text = $event['message']['text'];
+                $messages['replyToken'] = $replyToken;
+                if($text == 'ตรวจสอบข้อมูล'){
+                    $messages['messages'][] = $this->getFormatTextMessage("ไม่มีให้ตรวจสอบหรอก อิอิ");
+                    $messages['messages'][] = $this->getFormatTextMessage("บัยยย");
+                }else{
+                    $messages['messages'][] = $this->getFormatTextMessage("ทดสอบอยู่ ไม่ว่าง");
+                }
+            }
+        }
+        $encodedMessage = json_encode($messages);
 
         $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
         $LINEDatas['token'] = "tDPaJd+bW7UKPKF5zqRNze0Oh17zytPFmQmtGkJsSMY2WT+HaUpS1o0np4Fd3x+WxsOSQ5J3j1cXI6A+yN+8a5zr8onFXU7ozOxxjX4VUds70mOAfI74sjOlxFXXBe2+wQy72HqPAQLNrwBKIvD/HwdB04t89/1O/w1cDnyilFU=";
 
-        $this->sentMessage($encodeJson,$LINEDatas);
+        $this->replyMessage($encodedMessage,$LINEDatas);
 
         /*Return HTTP Request 200*/
         return http_response_code(200);
@@ -123,7 +129,7 @@ class MemberCrudController extends CrudController
         return $datas;
     }
 
-    public function sentMessage($encodeJson,$datas)
+    public function replyMessage($encodeJson,$datas)
     {
         $datasReturn = [];
         $curl = curl_init();
