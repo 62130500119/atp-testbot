@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/liff/reg', function () {
+    return view('liffreg');
+});
+Route::get('/liff/info', function () {
+    return view('liffinfo');
+});
