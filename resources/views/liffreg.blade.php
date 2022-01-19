@@ -4,16 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Register</title>
-        <script src=”https://d.line-scdn.net/liff/1.0/sdk.js"> </script>
-        <script src=”lib/jquery-3.3.1.min.js”> </script>
-        <script src=”lib/bootstrap.min.js”> </script>
-        <link href=”lib/bootstrap.min.css” rel=”stylesheet” />
     </head>
     <body>
-        <form action="register" method="get">
+        <form action="info" method="get">
             <div class="row">
                 <div class="col-md-6" style="margin:5px">
-                    <input class="form-control" type="hidden" id="userid" name="userid" /> <br />
+                    <input class="form-control" type="hidden" id="userid" name="userid" value=""/> <br />
                     <label>NAME:</label><br />
                     <input class="form-control" type="text" id="name" name="name" /><br />
                     <label>TEL:</label><br />
@@ -25,5 +21,21 @@
                 </div>
             </div>
         </form>
+        <script src="https://static.line-scdn.net/liff/edge/versions/2.3.0/sdk.js"></script>
+        <script>
+            function runApp() {
+              liff.getProfile().then(profile => {
+                document.getElementById("userid").value = profile.userId;
+                console.log(profile.userId);
+              }).catch(err => console.error(err));
+            }
+            liff.init({ liffId: "1656819334-zJP6arE9" }, () => {
+              if (liff.isLoggedIn()) {
+                runApp()
+              } else {
+                liff.login();
+              }
+            }, err => console.error(err.code, error.message));
+        </script>
     </body>
 </html>

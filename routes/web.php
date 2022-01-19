@@ -22,4 +22,4 @@ Route::get('/liff/reg', function () {
 });
 Route::get('/liff/info', function () {
     return view('liffinfo');
-});
+})->name('info');
