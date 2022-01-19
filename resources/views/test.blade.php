@@ -9,17 +9,19 @@
         <script src="https://static.line-scdn.net/liff/edge/versions/2.3.0/sdk.js"></script>
         <script>
             function runApp() {
-              liff.getProfile().then(profile => {
-                document.cookie="uid="profile.userId;
-              }).catch(err => console.error(err));
+                document.cookie="uid=1150";
+            //   liff.getProfile().then(profile => {
+            //     document.cookie="uid="profile.userId;
+            //   }).catch(err => console.error(err));
+            // }
+            // liff.init({ liffId: "1656819334-zJP6arE9" }, () => {
+            //   if (liff.isLoggedIn()) {
+            //     runApp()
+            //   } else {
+            //     liff.login();
+            //   }
+            // }, err => console.error(err.code, error.message));
             }
-            liff.init({ liffId: "1656819334-zJP6arE9" }, () => {
-              if (liff.isLoggedIn()) {
-                runApp()
-              } else {
-                liff.login();
-              }
-            }, err => console.error(err.code, error.message));
         </script>
         <?php
             $uid = $_COOKIE['uid'];
@@ -35,7 +37,7 @@
                 $email = $member->email;
                 }
             }
-        ?>
+             ?>
         <div class="row">
             <div class="col-md-6" style="margin:5px">
                 <p>NAME: {{ $name }}</p>

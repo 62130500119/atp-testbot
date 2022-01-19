@@ -20,6 +20,11 @@ Route::get('/', function () {
 Route::get('/liff/reg', function () {
     return view('liffreg');
 });
+
 Route::get('/liff/info', function () {
     return view('liffinfo');
-})->name('info');
+});
+
+Route::get('/liff/test', function () {
+    return view('test');
+});
