@@ -9,7 +9,7 @@
         <form action="{{ route('regis') }}" method="post">
             <div class="row">
                 <div class="col-md-6" style="margin:5px">
-                    <input class="form-control" type="hidden" id="userid" name="userid" value="1160"/> <br />
+                    <input class="form-control" type="hidden" id="userid" name="userid" value=""/> <br />
                     <label>NAME:</label><br />
                     <input class="form-control" type="text" id="name" name="name" /><br />
                     <label>TEL:</label><br />
@@ -22,7 +22,7 @@
             </div>
         </form>
         <script src="https://static.line-scdn.net/liff/edge/versions/2.3.0/sdk.js"></script>
-        {{-- <script>
+        <script>
             function runApp() {
               liff.getProfile().then(profile => {
                 document.getElementById("userid").value = profile.userId;
@@ -35,6 +35,6 @@
                 liff.login();
               }
             }, err => console.error(err.code, error.message));
-        </script> --}}
+        </script>
     </body>
 </html>
