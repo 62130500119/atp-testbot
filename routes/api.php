@@ -23,3 +23,4 @@ Route::post('/atp-bot',[ MemberCrudController::class,'linebot']);
 
 Route::post('/register',[ MemberCrudController::class,'regis'])->name('regis');
 
+Route::post('/get/info',[ MemberCrudController::class,'getinfo'])->name('getInfo');

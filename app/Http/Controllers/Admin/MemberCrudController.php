@@ -189,4 +189,12 @@ class MemberCrudController extends CrudController
         $member->save();
         return view('liffinfo',compact('name','tel','email'));
     }
+
+    public function getinfo(Request $request){
+        $member = Member::find('uid',$request->userid);
+        $name = $member->name;
+        $tel = $member->tel;
+        $email = $member->email;
+        return view('liffinfo',compact('name','tel','email'));
+    }
 }
