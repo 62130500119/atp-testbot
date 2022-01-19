@@ -22,17 +22,13 @@
             }, err => console.error(err.code, error.message));
         </script>
         <?php
-            $uid = $_COOKIE['uid'];
-            $member = App\Models\Member::where('uid',strval($uid))->first();
-            if(!is_null($member)){
-                if(!isset($name)){
-                $name = $member->name;
-                }
-                if(!isset($tel)){
-                $tel = $member->tel;
-                }
-                if(!isset($email)){
-                $email = $member->email;
+            if(!isset($name) || !isset($tel) || !isset($email)){
+                $uid = $_COOKIE['uid'];
+                $member = App\Models\Member::where('uid',strval($uid))->first();
+                if(!is_null($member)){
+                    $name = $member->name;
+                    $tel = $member->tel;
+                    $email = $member->email;
                 }
             }
         ?>
