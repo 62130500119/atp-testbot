@@ -10,7 +10,7 @@
         <script>
             function runApp() {
               liff.getProfile().then(profile => {
-                window.location.href="/liff/info?uid="+profile.userId;
+                document.cookie="uid="profile.userId;
               }).catch(err => console.error(err));
             }
             liff.init({ liffId: "1656819334-zJP6arE9" }, () => {
@@ -22,16 +22,18 @@
             }, err => console.error(err.code, error.message));
         </script>
         <?php
-            $uid = $_GET["uid"]
+            $uid = $_COOKIE['uid']
             $member = App\Models\Member::where('uid',$uid);
-            if(is_null($name)){
-            $name = $member->name;
-            }
-            if(is_null($tel)){
-            $tel = $member->tel;
-            }
-            if(is_null($email)){
-            $email = $member->email;
+            if(!is_null($member)){
+                if(is_null($name)){
+                $name = $member->name;
+                }
+                if(is_null($tel)){
+                $tel = $member->tel;
+                }
+                if(is_null($email)){
+                $email = $member->email;
+                }
             }
              ?>
         <div class="row">
