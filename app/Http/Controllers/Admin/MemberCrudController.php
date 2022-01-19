@@ -173,7 +173,7 @@ class MemberCrudController extends CrudController
 
     public function regis(Request $request){
         if(Member::where('uid',$request->userid)->exists()){
-            $member = Member::find('uid',$request->userid);
+            $member = Member::where('uid',$request->userid)->first();
         }else{
             $member = new Member;
             $member->uid = $request->userid;
@@ -191,7 +191,7 @@ class MemberCrudController extends CrudController
     }
 
     public function getinfo(Request $request){
-        $member = Member::find('uid',$request->userid);
+        $member = Member::where('uid',$request->userid)->first();
         $name = $member->name;
         $tel = $member->tel;
         $email = $member->email;

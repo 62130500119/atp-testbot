@@ -22,11 +22,8 @@ Route::get('/liff/reg', function () {
 });
 
 Route::get('/liff/info', function () {
-    return view('liffinfo');
+    return view('getinfo');
 });
 
-Route::get('/liff/test', function () {
-    return view('test');
-});
 
 
