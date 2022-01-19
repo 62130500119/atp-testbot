@@ -13,11 +13,11 @@ class CreateMembersTable extends Migration
     public function up()
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('uid')->unique();
-            $table->string('name')->nullable();
-            $table->integer('tel')->nullable();
-            $table->string('email')->nullable();
+            $table->id();
+            $table->string('uid',100)->unique();
+            $table->string('name',50)->nullable();
+            $table->integer('tel',50)->nullable()->autoIncrement(false);
+            $table->string('email',200)->nullable();
             $table->timestamps();
         });
     }
