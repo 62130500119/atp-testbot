@@ -28,7 +28,7 @@
                 document.getElementById("userid").value = profile.userId;
               }).catch(err => console.error(err));
             }
-            liff.init({ liffId: "1656819334-zJP6arE9" }, () => {
+            liff.init({ liffId: "1656819334-36MvAPpo" }, () => {
               if (liff.isLoggedIn()) {
                 runApp()
               } else {
