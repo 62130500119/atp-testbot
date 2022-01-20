@@ -100,20 +100,33 @@ class MemberCrudController extends CrudController
         if(!is_null($events['events'])){
             foreach($events['events'] as $event){
                 $replyToken = $event['replyToken'];
-                $text = $event['message']['text'];
                 $messages['replyToken'] = $replyToken;
                 $uid = $event['source']['userId'];
-                if($text == 'ตรวจสอบข้อมูล'){
-                    $user = Member::where('uid',$uid)->first();
-                    if(is_null($user)){
-                        $messages['messages'][] = $this->getFormatTextMessage("ยังไม่ได้ลงทะเบียนนะ กดเมนูขวาสุดเลย");
+                if($text = $event['type'] = 'message'){
+                    $text = $event['message']['text'];
+                    if($text == 'ตรวจสอบข้อมูล'){
+                        $user = Member::where('uid',$uid)->first();
+                        if(is_null($user)){
+                            $messages['messages'][] = $this->getFormatTextMessage("ยังไม่ได้ลงทะเบียนนะ กดเมนูขวาสุดเลย");
+                        }else{
+                            $messages['messages'][] = $this->getFormatTextMessage("ชื่อ : " . $user->name . "\nอีเมลล์ : " . $user->email . "\nเบอร์ : " . $user->tel);
+                        }
+
+                    }elseif($text == 'อยากเลี้ยงสัตว์' || $text == 'สัตว์เลี้ยง'){
+                        $animals = ['หมา','แมว','หมี','นก','จระเข้'];
+                        $messages['messages'][] = $this->getPostbackQR("ตัวอะไร",5,'Animal',$animals);
                     }else{
-                        $messages['messages'][] = $this->getFormatTextMessage("ชื่อ : " . $user->name . "\nอีเมลล์ : " . $user->email . "\nเบอร์ : " . $user->tel);
+                        $messages['messages'][] = $this->getFormatTextMessage("ทดสอบอยู่ ไม่ว่าง");
                     }
-
-
-                }else{
-                    $messages['messages'][] = $this->getFormatTextMessage("ทดสอบอยู่ ไม่ว่าง");
+                }elseif($text = $event['type'] == 'postback'){
+                    $data = $event['postback']['data'];
+                    switch($data){
+                        case preg_match('/Animal\=.*/', $data) ? $data : !$data:
+                            $messages['messages'][] = $this->getFormatTextMessage("อยากเลี้ยง" . substr($data,7) . "หรอ อืม ถามไปงั้นแหละ ไม่ได้อยากรู้ ;)");
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -133,6 +146,22 @@ class MemberCrudController extends CrudController
         $datas = [];
         $datas['type'] = 'text';
         $datas['text'] = $text;
+
+        return $datas;
+    }
+
+    public function getPostbackQR($text,$num,$k,$items)
+    {
+        $datas = [];
+        $datas['type'] = 'text';
+        $datas['text'] = $text;
+        for($i=0; $i<$num; $i++){
+            $datas['quickReply']['item'][$i]['type'] = 'action';
+            $datas['quickReply']['item'][$i]['action']['type'] = 'postback';
+            $datas['quickReply']['item'][$i]['action']['label'] = $items[$i];
+            $datas['quickReply']['item'][$i]['action']['data'] = $k . "=" . $items[$i];
+        };
+
 
         return $datas;
     }
