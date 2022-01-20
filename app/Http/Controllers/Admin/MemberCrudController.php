@@ -102,9 +102,16 @@ class MemberCrudController extends CrudController
                 $replyToken = $event['replyToken'];
                 $text = $event['message']['text'];
                 $messages['replyToken'] = $replyToken;
+                $uid = $event['source']['userId'];
                 if($text == 'ตรวจสอบข้อมูล'){
-                    $messages['messages'][] = $this->getFormatTextMessage("ไม่มีให้ตรวจสอบหรอก อิอิ");
-                    $messages['messages'][] = $this->getFormatTextMessage("บัยยย");
+                    $user = Member::where('uid',$uid)->first();
+                    if(is_null($user)){
+                        $messages['messages'][] = $this->getFormatTextMessage("ยังไม่ได้ลงทะเบียนนะ กดเมนูขวาสุดเลย");
+                    }else{
+                        $messages['messages'][] = $this->getFormatTextMessage("ชื่อ : " . $user->name . "\nอีเมลล์ : " . $user->email . "\nเบอร์ : " . $user->tel);
+                    }
+
+
                 }else{
                     $messages['messages'][] = $this->getFormatTextMessage("ทดสอบอยู่ ไม่ว่าง");
                 }
