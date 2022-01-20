@@ -118,7 +118,7 @@ class MemberCrudController extends CrudController
                     }else{
                         $messages['messages'][] = $this->getFormatTextMessage("ทดสอบอยู่ ไม่ว่าง");
                     }
-                }elseif($text = $event['type'] == 'postback'){
+                }elseif($event['type'] == 'postback'){
                     $data = $event['postback']['data'];
                     switch($data){
                         case preg_match('/Animal\=.*/', $data) ? $data : !$data:
@@ -130,14 +130,15 @@ class MemberCrudController extends CrudController
                 }
             }
         }
-        $encodedMessage = json_encode($messages);
+        // $encodedMessage = json_encode($messages);
 
-        $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
-        $LINEDatas['token'] = "tDPaJd+bW7UKPKF5zqRNze0Oh17zytPFmQmtGkJsSMY2WT+HaUpS1o0np4Fd3x+WxsOSQ5J3j1cXI6A+yN+8a5zr8onFXU7ozOxxjX4VUds70mOAfI74sjOlxFXXBe2+wQy72HqPAQLNrwBKIvD/HwdB04t89/1O/w1cDnyilFU=";
+        // $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
+        // $LINEDatas['token'] = "tDPaJd+bW7UKPKF5zqRNze0Oh17zytPFmQmtGkJsSMY2WT+HaUpS1o0np4Fd3x+WxsOSQ5J3j1cXI6A+yN+8a5zr8onFXU7ozOxxjX4VUds70mOAfI74sjOlxFXXBe2+wQy72HqPAQLNrwBKIvD/HwdB04t89/1O/w1cDnyilFU=";
 
-        $this->replyMessage($encodedMessage,$LINEDatas);
+        // $this->replyMessage($encodedMessage,$LINEDatas);
 
-        return http_response_code(200);
+        // return http_response_code(200);
+        return $messages;
     }
 
     public function getFormatTextMessage($text)
