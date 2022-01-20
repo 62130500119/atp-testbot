@@ -192,9 +192,6 @@ class MemberCrudController extends CrudController
 
     public function getinfo(Request $request){
         $member = Member::where('uid',$request->userid)->first();
-        $name = $member->name;
-        $tel = $member->tel;
-        $email = $member->email;
-        return view('liffinfo',compact('name','tel','email'));
+        return $member->makeHidden('id','uid');
     }
 }
