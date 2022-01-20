@@ -102,7 +102,7 @@ class MemberCrudController extends CrudController
                 $replyToken = $event['replyToken'];
                 $messages['replyToken'] = $replyToken;
                 $uid = $event['source']['userId'];
-                if($text = $event['type'] = 'message'){
+                if($event['type'] == 'message'){
                     $text = $event['message']['text'];
                     if($text == 'ตรวจสอบข้อมูล'){
                         $user = Member::where('uid',$uid)->first();
