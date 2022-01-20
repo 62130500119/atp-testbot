@@ -130,15 +130,15 @@ class MemberCrudController extends CrudController
                 }
             }
         }
-        $encodedMessage = json_encode($messages);
+        // $encodedMessage = json_encode($messages);
 
-        $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
-        $LINEDatas['token'] = "tDPaJd+bW7UKPKF5zqRNze0Oh17zytPFmQmtGkJsSMY2WT+HaUpS1o0np4Fd3x+WxsOSQ5J3j1cXI6A+yN+8a5zr8onFXU7ozOxxjX4VUds70mOAfI74sjOlxFXXBe2+wQy72HqPAQLNrwBKIvD/HwdB04t89/1O/w1cDnyilFU=";
+        // $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
+        // $LINEDatas['token'] = "tDPaJd+bW7UKPKF5zqRNze0Oh17zytPFmQmtGkJsSMY2WT+HaUpS1o0np4Fd3x+WxsOSQ5J3j1cXI6A+yN+8a5zr8onFXU7ozOxxjX4VUds70mOAfI74sjOlxFXXBe2+wQy72HqPAQLNrwBKIvD/HwdB04t89/1O/w1cDnyilFU=";
 
-        $this->replyMessage($encodedMessage,$LINEDatas);
+        // $this->replyMessage($encodedMessage,$LINEDatas);
 
-        /*Return HTTP Request 200*/
-        return http_response_code(200);
+        // return http_response_code(200);
+        return $messages;
     }
 
     public function getFormatTextMessage($text)
@@ -156,10 +156,10 @@ class MemberCrudController extends CrudController
         $datas['type'] = 'text';
         $datas['text'] = $text;
         for($i=0; $i<$num; $i++){
-            $datas['quickReply']['item'][$i]['type'] = 'action';
-            $datas['quickReply']['item'][$i]['action']['type'] = 'postback';
-            $datas['quickReply']['item'][$i]['action']['label'] = $items[$i];
-            $datas['quickReply']['item'][$i]['action']['data'] = $k . "=" . $items[$i];
+            $datas['quickReply']['items'][$i]['type'] = 'action';
+            $datas['quickReply']['items'][$i]['action']['type'] = 'postback';
+            $datas['quickReply']['items'][$i]['action']['label'] = $items[$i];
+            $datas['quickReply']['items'][$i]['action']['data'] = $k . "=" . $items[$i];
         };
 
 
